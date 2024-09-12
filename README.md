@@ -1,229 +1,308 @@
 # COLOR_CONVERSIONS_OF-IMAGE
 ## AIM
-To write a python program using OpenCV to do the following image manipulations.
+Write a Python program using OpenCV that performs the following tasks:
 
-i) Read, display, and write an image.
+i) Read and Display an Image.
 
-ii) Access the rows and columns in an image.
+ii) Draw Shapes and Add Text.
 
-iii) Cut and paste a small portion of the image.
+iii) Image Color Conversion.
 
-iv)To perform the color conversion between RGB, BGR, HSV, and YCbCr color models.
+iv) Access and Manipulate Image Pixels.
+
+v) Image Resizing
+
+vi) Image Cropping
+
+vii) Image Flipping
+
+viii)	Write and Save the Modified Image
 
 
 ## Software Required:
 Anaconda - Python 3.7
 ## Algorithm:
 ### Step1:
-Choose an image and save it as a filename.jpg ,
+Load an image from your local directory and display it.
 ### Step2:
-Use imread(filename, flags) to read the file.
+1.  Draw a line from the top-left to the bottom-right of the image.
+
+2.	Draw a circle at the center of the image.
+
+3.	Draw a rectangle around a specific region of interest in the image.
+
+4.	Add the text "OpenCV Drawing" at the top-left corner of the image.
+
 ### Step3:
-Use imshow(window_name, image) to display the image.
+1.	Convert the image from RGB to HSV and display it.
+2.	Convert the image from RGB to GRAY and display it.
+3.	Convert the image from RGB to YCrCb and display it.
+4.	Convert the HSV image back to RGB and display it.
+
 ### Step4:
-Use imwrite(filename, image) to write the image.
+1.	Access and print the value of the pixel at coordinates (100, 100).
+2.	Modify the color of the pixel at (200, 200) to white.
+
 ### Step5:
-End the program and close the output image windows.
+Resize the original image to half its size and display it.
 ### Step6:
-Convert BGR and RGB to HSV and GRAY
+Crop a region of interest (ROI) from the image (e.g., a 100x100 pixel area starting at (50, 50)) and display it.
 ### Step7:
-Convert HSV to RGB and BGR
+1.	Flip the original image horizontally and display it.
+2.	Flip the original image vertically and display it.
+
 ### Step8:
-Convert RGB and BGR to YCrCb
-### Step9:
-Split and Merge RGB Image
-### Step10:
-Split and merge HSV Image
+Save the final modified image to your local directory.
+
 
 ## Program:
-#### Developed By: DHARSHAN V
-#### Register Number: 212222230031
+### Developed By: DHARSHAN V
+### Register Number: 212222230031
 
 
 ## Output:
 
-### i) Read and display the image
-
-```python
-     import cv2
-    image=cv2.imread('dog.png',1)
-    image=cv2.resize(image,(300,300))
-    cv2.imshow('Arun',image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows() 
-
+### 1. Read and display the image
+i.Load an image from your local directory and display it.
 ```
-
-![Screenshot 2024-09-05 183844](https://github.com/user-attachments/assets/6d5a7e42-b921-4b08-a5b1-317beaecbf56)
-
-
-### ii)Write the image
-
-```python
-   image=cv2.imread('dog.png',0)
-    cv2.imwrite('demo.png',image)
+import cv2
+image=cv2.imread('dog.png',1)
+image = cv2.resize(image, (400, 300))
+cv2.imshow('NATUREK',image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 ```
+![Screenshot 2024-09-12 152357](https://github.com/user-attachments/assets/bcebfcf9-a059-4d77-a533-4ad9913ba877)
 
-![Screenshot 2024-09-05 190707](https://github.com/user-attachments/assets/52e02cbf-0631-4ad8-8a32-f4fdd2c101a8)
 
-
-### iii)Shape of the Image
-
-```python
-    image=cv2.imread('dog.png',1)
-    print(image.shape)
+### Draw Shapes and Add Text
+(1) Draw a line from the top-left to the bottom-right of the image.
 ```
-
-
-
-### iv)Access rows and columns
-
-```python
-import random
-    image=cv2.imread('dog.png',1)
-    image=cv2.resize(image,(500,500))
-    for i in range (250,500):
-      for j in range(image.shape[1]):
-          image[i][j]=[random.randint(0,255),
-                       random.randint(0,255),
-                       random.randint(0,255)] 
-    cv2.imshow('part image',image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+import cv2
+image = cv2.imread("dog.png")
+image = cv2.resize(image, (400, 300))
+res = cv2.line(image, (0, 0), (image.shape[1], image.shape[0]), (255,0,0), 10)
+cv2.imshow('WINDOW', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 ```
-![Screenshot 2024-09-05 185120](https://github.com/user-attachments/assets/6421e9fc-f02e-4914-9637-595cca89167b)
+![Screenshot 2024-09-12 152537](https://github.com/user-attachments/assets/974de23a-81b2-4676-8de7-d026f3bfd83e)
 
 
-### v)Cut and paste portion of image
-
-```python
-    image=cv2.imread('dog.png',1)
-    image=cv2.resize(image,(300,300))
-    tag =image[150:200,110:160]
-    image[110:160,150:200] = tag
-    cv2.imshow('image1',image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+2. Draw a circle at the center of the image.
 ```
-![Screenshot 2024-09-05 185257](https://github.com/user-attachments/assets/002060b9-351c-43e6-bd59-0db624ed5863)
-
-
-
-
-
-### vi) BGR and RGB to HSV and GRAY
-
-```python
-    img = cv2.imread('dog.png',1)
-    img = cv2.resize(img,(200,200))
-    cv2.imshow('Original Image',img)
-
-    hsv1 = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-    cv2.imshow('BGR2HSV',hsv1)
-
-    hsv2 = cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
-    cv2.imshow('RGB2HSV',hsv2)
-    
-    gray1 = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    cv2.imshow('BGR2GRAY',gray1)
-    
-    gray2 = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-    cv2.imshow('RGB2GRAY',gray2)
-    
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+import cv2
+image = cv2.imread("dog.png")
+image = cv2.resize(image, (400, 300))
+height, width, _ = image.shape
+center_coordinates = (width // 2, height // 2)
+res = cv2.circle(image, center_coordinates, 120, (0, 255, 0), 10)
+cv2.imshow('WINDOW', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 ```
+![Screenshot 2024-09-12 152636](https://github.com/user-attachments/assets/7a4fffd4-e9cf-425e-85bc-27a0800ad475)
 
 
-![Screenshot 2024-09-05 185503](https://github.com/user-attachments/assets/12b96a70-e545-4fc1-a50a-cc35d76ce2dd)
-
-
-
-### vii) HSV to RGB and BGR
-
-```python
-img = cv2.imread('dog.png')
-img = cv2.resize(img,(200,200))
-
-img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2.imshow('Original HSV Image',img)
-
-RGB = cv2.cvtColor(img,cv2.COLOR_HSV2RGB)
-cv2.imshow('2HSV2BGR',RGB)
-
-BGR = cv2.cvtColor(img,cv2.COLOR_HSV2BGR)
-cv2.imshow('HSV2RGB',BGR)
-
+3.Draw a rectangle around a specific region of interest in the image.
+```
+import cv2
+image = cv2.imread("dog.png")
+image = cv2.resize(image, (400, 300))
+start = (150, 100)
+stop = (300, 200)
+color = (255, 255, 100)
+thickness = 10           
+res_img = cv2.rectangle(image, start, stop, color, thickness)
+cv2.imshow('WINDOW', res_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
+![Screenshot 2024-09-12 152706](https://github.com/user-attachments/assets/8218cf6a-26cb-46eb-a930-5fbc384ccc2a)
 
-![Screenshot 2024-09-05 185635](https://github.com/user-attachments/assets/d291e5a3-5c0a-40ab-95fe-fca9875ead0a)
 
-
-### viii) RGB and BGR to YCrCb
-
-```python
-img = cv2.imread('dog.png')
-img = cv2.resize(img,(200,200))
-cv2.imshow('Original RGB Image',img)
-
-YCrCb1 = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
-cv2.imshow('RGB-2-YCrCb',YCrCb1)
-
-YCrCb2 = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
-cv2.imshow('BGR-2-YCrCb',YCrCb2)
-
+4.Add the text "OpenCV Drawing" at the top-left corner of the image.
+```
+import cv2
+image = cv2.imread("dog.png")
+image = cv2.resize(image, (400, 300))
+text = "OpenCV Drawing"
+position = (10, 50)
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_scale = 1
+color = (255, 255, 255) 
+thickness = 2
+res = cv2.putText(image, text, position, font, font_scale, color, thickness, cv2.LINE_AA)
+cv2.imshow('WINDOW', res)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-![Screenshot 2024-09-05 185741](https://github.com/user-attachments/assets/9c4f98fb-579a-48f6-b4a0-221ba0cedca8)
+![Screenshot 2024-09-12 152733](https://github.com/user-attachments/assets/fcf6a393-69c5-465d-b159-e9aaf7010207)
 
 
-### ix) Split and merge RGB Image
-```python
-img = cv2.imread('dog.png',1)
-img = cv2.resize(img,(200,200))
-
-R = img[:,:,2]
-G = img[:,:,1]
-B = img[:,:,0]
-
-cv2.imshow('R-Channel',R)
-cv2.imshow('G-Channel',G)
-cv2.imshow('B-Channel',B)
-
-merged = cv2.merge((B,G,R))
-cv2.imshow('Merged RGB image',merged)
-
+### iii)Image Color Conversion
+(i)Convert the image from RGB to HSV and display it
+```
+import cv2
+image = cv2.imread('dog.png',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+hsv = cv2.cvtColor(image,cv2.COLOR_RGB2HSV)
+cv2.imshow('RGB2HSV',hsv)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-![Screenshot 2024-09-05 185929](https://github.com/user-attachments/assets/97c1335b-85a0-4254-84ba-e3dafb4444d8)
+![Screenshot 2024-09-12 152803](https://github.com/user-attachments/assets/64b6a9f0-1c33-4288-88d7-b9656d46cdad)
 
 
-### x) Split and merge HSV Image
-```python
-img = cv2.imread("dog.png",1)
-img = cv2.resize(img,(200,200))
-img=cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
+(2) Convert the image from RGB to GRAY and display it.
 
-H,S,V=cv2.split(img)
-
-cv2.imshow('Hue',H)
-cv2.imshow('Saturation',S)
-cv2.imshow('Value',V)
-
-merged = cv2.merge((H,S,V))
-cv2.imshow('Merged',merged)
-
+```
+import cv2
+image = cv2.imread('dog.png',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+gray = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
+cv2.imshow('RGB2GRAY',gray)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-![Screenshot 2024-09-05 190100](https://github.com/user-attachments/assets/84f95481-354f-4393-8d48-9172df78d085)
+
+![Screenshot 2024-09-12 152848](https://github.com/user-attachments/assets/d618eff4-75d1-4127-818c-709cd46c09b2)
 
 
+(3) Convert the image from RGB to YCrCb and display it.
+```
+import cv2
+image = cv2.imread('dog.png',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+YCrCb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
+cv2.imshow('RGB-2-YCrCb',YCrCb)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+![Screenshot 2024-09-12 152914](https://github.com/user-attachments/assets/b3fae7e3-2ecd-4309-b686-9613d4406ad0)
+
+
+(4) Convert the HSV image back to RGB and display it.
+```
+import cv2
+image = cv2.imread('dog.png',1)
+image = cv2.resize(image,(300,200))
+cv2.imshow('ORIGINAL IMAGE',image)
+RGB = cv2.cvtColor(image,cv2.COLOR_HSV2BGR)
+cv2.imshow('HSV2RGB',RGB)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![Screenshot 2024-09-12 152944](https://github.com/user-attachments/assets/48c64e93-1649-4091-b3cd-5767ae89d683)
+
+
+
+### iv)Access and Manipulate Image Pixels
+(1) Access and print the value of the pixel at coordinates (100, 100)
+```
+pixel_value = image[100, 100]
+print(f"Pixel value at (100, 100): {pixel_value}")
+```
+
+![Screenshot 2024-09-12 153251](https://github.com/user-attachments/assets/7c98c95f-9def-488a-942c-38a4998ae012)
+
+
+(2) Modify the color of the pixel at (200, 200) to white
+```
+import cv2
+image = cv2.imread('dog.png',1)
+image = cv2.resize(image,(400,300))
+cv2.imshow('ORIGINAL IMAGE',image)
+image[200, 200] = [255, 255, 255] 
+cv2.imshow('MODIFIED IMAGE', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+![Screenshot 2024-09-12 153027](https://github.com/user-attachments/assets/c4cd48be-c93f-4640-a01d-b85009278fa1)
+
+
+### v)Image Resizing:
+Resize the original image to half its size and display it.
+```
+cv2.imshow('ORIGINAL IMAGE',image)
+resized_image = cv2.resize(image, (image.shape[1] // 2, image.shape[0] // 2))
+cv2.imshow('RESIZED IMAGE', resized_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![Screenshot 2024-09-12 153052](https://github.com/user-attachments/assets/38f22138-acb1-4093-83f7-b3fa3f253292)
+
+
+
+### vi)Image Cropping
+Crop a region of interest (ROI) from the image (e.g., a 100x100 pixel area starting at (50, 50)) and display it.
+```
+import cv2
+image = cv2.imread('dog.png',1)
+image = cv2.resize(image,(400,300))
+x, y = 50, 50
+width, height = 100, 100
+roi = image[y:y + height, x:x + width]
+cv2.imshow('CROPPED IMAGE', roi)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![Screenshot 2024-09-12 153117](https://github.com/user-attachments/assets/72b32d55-a45c-491e-8a32-5a647a8bfdf4)
+
+
+### vii)Image Flipping:
+(1) Flip the original image horizontally and display it.
+```
+import cv2
+image = cv2.imread("dog.png")
+image = cv2.resize(image,(300,200))
+res=cv2.rotate(image,cv2.ROTATE_180)
+cv2.imshow('ORIGINAL IMAGE',image)
+cv2.imshow('FLIPPED IMAGE', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![Screenshot 2024-09-12 153142](https://github.com/user-attachments/assets/0c59aaa8-26f9-43e9-94c8-368c7fde5163)
+
+
+
+(2) Flip the original image vertically and display it.
+```
+import cv2
+image = cv2.imread("dog.png")
+image = cv2.resize(image,(300,200))
+res=cv2.rotate(image,cv2.ROTATE_90_CLOCKWISE)
+cv2.imshow('ORIGINAL IMAGE',image)
+cv2.imshow('FLIPPED IMAGE', res)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+![Screenshot 2024-09-12 153205](https://github.com/user-attachments/assets/344e1c04-a11d-49f9-82b6-1c6956369ce4)
+
+
+### viii)Write and Save the Modified Image
+Save the final modified image to your local directory.
+```
+import cv2
+img = cv2.imread("dog.png")
+img = cv2.resize(img,(300,200))
+cv2.imwrite('nature_pic.jpg',img)
+```
+![Screenshot 2024-09-12 153237](https://github.com/user-attachments/assets/3ebd47d5-f3cc-4b36-99ca-17155774b799)
 
 ## Result:
-Thus the images are read, displayed, and written ,and color conversion was performed between RGB, HSV and YCbCr color models successfully using the python program.
+
+Thus the images are read, displayed, and written ,and color conversion was performed successfully using the python program.
+
+
+
+
+
+
